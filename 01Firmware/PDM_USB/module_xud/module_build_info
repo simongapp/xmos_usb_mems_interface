@@ -1,0 +1,54 @@
+# This module_build_info is for a module that builds to a library
+
+# The LIBRARY variable needs to be set to the name of the library to
+# be built
+
+LIBRARIES =  xud_u xud_l xud_g xud_x200
+
+#Default is xs1b
+LIB_ARCH_xud_x200 = xs2a
+
+# You can set flags specifically for your module by using the MODULE_XCC_FLAGS
+# variable. So the following
+#
+#   MODULE_XCC_FLAGS = $(XCC_FLAGS) -O3
+#
+# specifies that everything in the modules should have the application
+# build flags with -O3 appended (so the files will build at
+# optimization level -O3).
+#
+# You can also set MODULE_XCC_C_FLAGS, MODULE_XCC_XC_FLAGS etc..
+
+MODULE_XCC_FLAGS = $(XCC_FLAGS) -g -O3
+
+LIB_XCC_FLAGS_xud_l =  -Wall -O3 -D UIFM_MODE=2 -DREF_CLK_FREQ=100 -fasm-linenum -fcomment-asm  -fsubword-select -D ARCH_L -DXUD_FULL_PIDTABLE=1 -fschedule 
+
+
+#U-series Lib
+LIB_XCC_FLAGS_xud_u =  -Wall -O3 -D UIFM_MODE=3 -DREF_CLK_FREQ=100 -fasm-linenum -fcomment-asm  -fsubword-select -DXUD_FULL_PIDTABLE=1 -fschedule -D ARCH_L -D ARCH_S -save-temps 
+#-DGLX_SUSPHY -DGLX_PWRDWN
+
+LIB_XCC_FLAGS_xud_u_lomem =  -Wall -O3 -D UIFM_MODE=3 -DREF_CLK_FREQ=100 -fasm-linenum -fcomment-asm  -fsubword-select -fschedule -D ARCH_L -D ARCH_S -DXUD_USB_TEST_MODE_DISABLED -DXUD_MAX_NUM_EP_IN=3 -DXUD_MAX_NUM_EP_OUT=3 -save-temps 
+
+#LIB_XCC_FLAGS_xud_u_sim =  -Wall -O3 -D UIFM_MODE=3 -DREF_CLK_FREQ=100 -fasm-linenum -fcomment-asm  -fsubword-select -DXUD_FULL_PIDTABLE=1 -fschedule -D ARCH_L -D ARCH_S -D GLX_SUSPHY -D GLX_PWRDWN -DSIMULATION
+
+#G-Series Lib
+LIB_XCC_FLAGS_xud_g = -Wall -O3 -D UIFM_MODE=2 -DREF_CLK_FREQ=100 -fasm-linenum -fcomment-asm  -fsubword-select -DARCH_G -DXUD_FULL_PIDTABLE=1 -fschedule -march=xs1b 
+
+#xCORE-200 Lib
+LIB_XCC_FLAGS_xud_x200 = -Wall -O3 -D UIFM_MODE=2 -DREF_CLK_FREQ=100 -fasm-linenum -fcomment-asm  -fsubword-select -DXUD_FULL_PIDTABLE=1 -fschedule -DARCH_L -DARCH_X200 -save-temps -mno-dual-issue
+
+DEPENDENT_MODULES = module_usb_shared
+
+EXCLUDE_FILES = XUD_Token_In.S XUD_Token_Ping.S XUD_Token_SOF.S XUD_Token_Out.S XUD_Token_Setup.S XUD_G_Crc.S XUD_TokenJmp.S
+
+# The EXPORT_SOURCE_DIRS variable are the directories that contain
+# include files for the library and any source files that you do not
+# want compiled into the library but supplied as source to the
+# application using the module.
+
+EXPORT_SOURCE_DIRS = src include
+
+OPTIONAL_HEADERS += xud_conf.h
+
+EXPORTED = 1

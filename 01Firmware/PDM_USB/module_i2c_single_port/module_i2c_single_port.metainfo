@@ -1,0 +1,101 @@
+-------------------------------------------------------------------------------
+-- Descriptive metadata
+-------------------------------------------------------------------------------
+
+componentName = "I2C Master Function Library (Multi Bit Ports)"
+componentFullName = ""
+alternativeNames = { }
+componentDescription = "A function library for implementing a simple I2C Master on a multi bit port"
+componentVersion = "1v0"
+
+-------------------------------------------------------------------------------
+-- Parameter descriptions.
+-------------------------------------------------------------------------------
+
+configPoints =
+{
+  bitTime =
+  {
+    short   = "Bit Period",
+    long    = "I2C Clock Period",
+    help    = "Time in clock ticks between successive bits. By default set to 1000 for 100 Kbit devices, but it can be overriden to 250 for 400 Kbit devices",
+    units   = "",
+    define  = "I2C_BIT_TIME", 
+    type    = "int",
+    min     = 250, 
+    max     = 20000,
+    resourceUsageFlags = {"noeffect"},
+    default = 10000
+  },
+  sdaBit =
+  {
+    short   = "SDA Bit Position",
+    long    = "",
+    help    = "Set to 1 for bit 0, 2 for bit 2, 4 for bit 3, 8 for bit 4 etc",
+    units   = "",
+    define  = "SDA_HIGH",
+    type    = "int",
+    options = {1,2,4,8},
+    resourceUsageFlags = {"noeffect"},
+    default = 1
+  },
+  sclBit =
+  {
+    short   = "SCL Bit Position",
+    long    = "",
+    help    = "Set to 1 for bit 0, 2 for bit 2, 4 for bit 3, 8 for bit 4 etc",
+    units   = "",
+    define  = "SCL_HIGH",
+    type    = "int",
+    options = {1,2,4,8},
+    resourceUsageFlags = {"noeffect"},
+    default = 2
+  },
+  restValue = {
+    short   = "Other Bits Value",
+    long    = "",
+    help    = "This constant defines the bit value of the other bits of the I2C port. The default value is 0xC, meaning that bits 2 and 3 are kept high",
+    units   = "",
+    define  = "S_REST",
+    type    = "string",
+    options = {"0x0","0x1","0x2","0x3","0x4","0x5","0x6","0x7","0x8","0x9","0xA","0xB","0xC","0xD","0xE","0xF"},
+    resourceUsageFlags = {"noeffect"},
+    default = "0xC"
+  },
+}
+
+derivedValues = {}
+
+ports = {
+  p_i2c = {
+    short   = "I2C Port",
+    long    = "I2C SDA and SCL on multi bit port",
+    help    = "",
+    width   = 4
+  },
+}
+
+channels = {
+}        
+
+function getConfigStatus()
+  local status = "Valid Configuration"
+  local issues = {}
+  return status, issues
+end
+            
+-------------------------------------------------------------------------------
+-- Source generation functions
+-------------------------------------------------------------------------------
+
+generatedCode = {
+  includes = { 
+    "i2c.h",
+  },
+  globals = [[
+  ]],
+  body = [[
+  ]]
+}
+
+api = {'i2c_master_init','i2c_master_write_reg'}
