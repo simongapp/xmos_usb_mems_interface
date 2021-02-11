@@ -1,9 +1,9 @@
 # XMOS USB - MEMS microphone array audio interface
-Hardware and firmware files for an USB audio interface based on the XMOS XUF216 for 16 microphones and the option to cascade multiple base boards.  
+Hardware and firmware files for a MEMS microphones USB audio interface based on the XMOS XUF216. Allows to connect up to  16 microphones and provides the option to cascade multiple base boards.  
 <img src="https://github.com/simongapp/xmos_usb_mems_interface/blob/master/images/IMG_5449.JPG">  
 
 ## Features
-- Operates at 48kHz/24bit
+- Operates at 48kHz/24bit, with USB 2.0 (UAC2)
 - One base board can process up to 16 MEMS microphones
 - Cascade multiple baseboards by sharing a word clock or sync to external clock master
 - Physically detached microphones, allows to add microphones in pairs of two
