@@ -1,5 +1,8 @@
 # XMOS USB - MEMS microphone array audio interface
 Hardware and firmware files for a MEMS microphones USB audio interface based on the XMOS XUF216. Allows to connect up to  16 microphones and provides the option to cascade multiple base boards.  
+
+This work was done as part of my master's thesis at the TU Berlin, Department of Engineering Acoustics [https://www.akustik.tu-berlin.de/menue/home/parameter/en/](https://www.akustik.tu-berlin.de/menue/home/parameter/en/). The system was evaluated with the Acoular Framework for beamforming [http://www.acoular.org/](http://www.acoular.org/).
+
 <img src="https://github.com/simongapp/xmos_usb_mems_interface/blob/master/images/IMG_5449.JPG">  
 
 ## Features
@@ -30,4 +33,3 @@ Hardware and firmware files for a MEMS microphones USB audio interface based on 
 - Data transfer from the microphone boards to the base board leads to inverted data signals on the base board. Fixed by multiplying -1 on the PCM signals.
 - No deterministic phase relationship between input and output of the CS2100. This results in a non-deterministic clock shift of up to 162.5ns@48kHz. Considered negligible with respect to the period of audio frequencies from 50ms(20Hz) to 42us(20kHz).
 - The current firmware starts audio sampling as soon as the uC is ready, which leads to different buffer sizes and thus a delay of several samples at the host when using multiple base boards. Solution: Synchronize start of audio sampling to first SOF after device configuration. To be implemented in the future.
-
